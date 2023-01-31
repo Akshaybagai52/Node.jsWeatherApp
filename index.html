@@ -229,15 +229,40 @@
     </div>
 
     <script>
-        const curDate = document.getAnimations("date")
+        const curDate = document.getElementById("date")
         let weathercon = document.getElementById("weathercon")
 
         const tempStatus = "Clouds"
+        const weekday = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"]
 
         const getCurrentDay = () => {
             let currentTime = new Date()
-            console.log(currentTime.getDay())
+            let day = weekday[currentTime.getDay()]
+            return day
         }
+
+        const getCurrentTime = () => {
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+            let now = new Date()
+            let month = months[now.getMonth()]
+            let date = now.getDate()
+
+            let hours = now.getHours()
+            let mins = now.getMinutes()
+            let period = "AM"
+            if (hours > 11) {
+                period = "PM"
+                if (hours > 12) {
+                    hours -= 12
+                }
+            }
+            if (mins < 10) {
+                mins = "0" + mins
+            }
+            return `${month} ${date} | ${hours}:${mins}${period}`
+
+        }
+        curDate.innerHTML = getCurrentDay() + " | " + getCurrentTime()
     </script>
 
 </body>
